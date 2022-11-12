@@ -10,6 +10,7 @@
     "start:prod": "npm run build && node dist/bin/www.js"
   },
   "dependencies": {
+    "class-validator": "^0.13.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
