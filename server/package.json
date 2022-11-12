@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "clean": "rimraf dist/*",
-    "copy-assets": "ts-node scripts/copyAssets",
+    "copy-assets": "ts-node tools/copyAssets",
     "build": "npm run clean && tsc && npm run copy-assets",
     "start:dev": "nodemon",
     "start:prod": "npm run build && node dist/bin/www.js"
