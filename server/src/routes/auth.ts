@@ -2,7 +2,7 @@ import express from "express";
 import { IsEmail, IsNotEmpty, validate } from "class-validator";
 
 import User from "../database/models/User";
-import { hashPassword } from "./utils";
+import { comparePasswords, generateAccessToken, hashPassword } from "./utils";
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ class Credentials {
 }
 
 /**
- * Authenticates user and provides access token
+ * Login user (via an access token)
  */
 router.post("/login", async (req, res) => {
   // Credentials
@@ -30,7 +30,36 @@ router.post("/login", async (req, res) => {
     return res.status(400).json({ success: false, errors });
   }
 
-  return res.json({ success: true, access: "some_access_token" });
+  // Authenticate user
+  try {
+    // Ensure user exists
+    const user = await User.findOne({ email: credentials.username });
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        error: "User not found.",
+      });
+    }
+
+    // Compare provided password with user's password hash
+    if (!(await comparePasswords(credentials.password, user.password_hash))) {
+      return res.status(400).json({
+        success: false,
+        error: "Wrong email or password.",
+      });
+    }
+
+    // Give the client an access token
+    return res.json({
+      success: true,
+      access_token: generateAccessToken({ email: user.email }),
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: error,
+    });
+  }
 });
 
 /**
