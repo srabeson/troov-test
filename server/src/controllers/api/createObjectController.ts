@@ -11,6 +11,11 @@ class CreateObjectRequestBody {
   description!: string;
 }
 
+/**
+ * Adds a new objects in the database
+ * provided the `name` and `description of the object
+ * in the request body
+ */
 const createObjectController: RequestHandler = async (req, res) => {
   // Prepare request body
   const reqBody = new CreateObjectRequestBody();
