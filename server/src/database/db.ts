@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 /**
  * Connect to a mongodb URI
+ *
  * @param uri mongodb URI to connect to
  * @returns mongoose instance
  */
