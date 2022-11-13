@@ -4,4 +4,5 @@ export default defineNuxtConfig({
     "bootstrap/dist/css/bootstrap.min.css",
     "@fortawesome/fontawesome-svg-core/styles.css",
   ],
+  ssr: false,
 });
