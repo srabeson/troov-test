@@ -1,15 +1,15 @@
 import { model, Schema } from "mongoose";
 
-interface IObject {
+interface IObj {
   name: string;
   description: string;
 }
 
-const objectSchema = new Schema<IObject>({
+const objSchema = new Schema<IObj>({
   name: { type: String, required: true },
   description: { type: String, required: true },
 });
 
-const Object = model<IObject>("Object", objectSchema);
+const Obj = model<IObj>("Obj", objSchema);
 
-export default Object;
+export default Obj;
