@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { FetchError } from "ohmyfetch";
 
+definePageMeta({
+  layout: false,
+});
+
 const config = useRuntimeConfig();
 
 const email = ref("");
