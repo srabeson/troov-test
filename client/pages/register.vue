@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { FetchError } from "ohmyfetch";
-
 definePageMeta({
   layout: false,
 });
@@ -21,11 +19,11 @@ const handleSubmit = async () => {
     // Form is submitting
     submitting.value = true;
 
-    // Send login request
+    // Send register request
     const response = await $fetch<{
       success: boolean;
       access_token: string;
-    }>(`/auth/login`, {
+    }>(`/auth/register`, {
       baseURL: config.public.apiBase,
       method: "POST",
       body: {
@@ -34,18 +32,11 @@ const handleSubmit = async () => {
       },
     });
 
-    // Store access token
-    localStorage.setItem("access_token", response.access_token);
-
-    // Navigate to home screen
-    await navigateTo("/");
+    // Navigate to login screen
+    await navigateTo("/login");
   } catch (error) {
     // Display error message in case of error
-    if (error instanceof FetchError) {
-      errorMessage.value = error.data.error;
-    } else {
-      errorMessage.value = "Something went wrong.";
-    }
+    errorMessage.value = "Something went wrong.";
   } finally {
     // Form is no longer submitting
     submitting.value = false;
@@ -68,7 +59,7 @@ const handleSubmit = async () => {
 
       <div class="col-12 col-md-8 col-lg-6 bg-light text-dark min-vh-100">
         <div class="text-center mx-md-5">
-          <h1 class="mt-5 display-1">Login</h1>
+          <h1 class="mt-5 display-1">Register</h1>
           <p>Welcome to the object management web app</p>
 
           <div
@@ -114,14 +105,14 @@ const handleSubmit = async () => {
                 >
                   <span class="visually-hidden">Loading...</span>
                 </div>
-                <span v-else>LOGIN</span>
+                <span v-else>REGISTER</span>
               </button>
             </div>
           </form>
 
           <div>
-            <span class="me-2">New member?</span>
-            <NuxtLink to="/register">Register</NuxtLink>
+            <span class="me-2">Already a member?</span>
+            <NuxtLink to="/login">Login</NuxtLink>
           </div>
         </div>
       </div>
