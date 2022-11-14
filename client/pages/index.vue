@@ -23,21 +23,6 @@ const { data: objects } = await useFetch<
 </script>
 
 <template>
-  <!-- Navbar -->
-  <nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-      <NuxtLink to="/" class="btn btn-dark">
-        <font-awesome-icon icon="fa-solid fa-house" />
-      </NuxtLink>
-
-      <NuxtLink class="navbar-brand" to="/">Objects</NuxtLink>
-
-      <button type="button" class="btn btn-dark">
-        <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
-      </button>
-    </div>
-  </nav>
-
   <!-- Object list -->
   <div class="container-fluid">
     <div class="row">
