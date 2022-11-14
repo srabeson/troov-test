@@ -7,7 +7,7 @@ if (!localStorage.getItem("access_token")) {
 const config = useRuntimeConfig();
 
 // Get all available objects
-const { data: objects } = await useFetch<
+const { data: objects, refresh } = await useFetch<
   {
     _id: string;
     name: string;
@@ -20,6 +20,34 @@ const { data: objects } = await useFetch<
   },
   baseURL: config.public.apiBase,
 });
+
+const errorMessage = ref<string | null>(null);
+
+// Handle object deletion
+const handleDelete = async (id: string) => {
+  try {
+    // Send object deletion request
+    await $fetch<{
+      success: boolean;
+      access_token: string;
+    }>(`/api/delete`, {
+      method: "POST",
+      body: {
+        id,
+      },
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+      baseURL: config.public.apiBase,
+    });
+
+    // Refresh page
+    refresh();
+  } catch (error) {
+    // Display error message in case of error
+    errorMessage.value = "Something went wrong.";
+  }
+};
 </script>
 
 <template>
@@ -37,6 +65,20 @@ const { data: objects } = await useFetch<
             <h5 class="card-header">{{ object.name }}</h5>
             <div class="card-body">
               <p class="card-text">{{ object.description }}</p>
+
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-light">
+                  <font-awesome-icon icon="fa-solid fa-pen-to-square" />
+                </button>
+
+                <button
+                  @click="handleDelete(object._id)"
+                  type="button"
+                  class="btn btn-light text-danger"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
