@@ -5,4 +5,9 @@ export default defineNuxtConfig({
     "@fortawesome/fontawesome-svg-core/styles.css",
   ],
   ssr: false,
+  runtimeConfig: {
+    public: {
+      apiBase: "http://localhost:5000",
+    },
+  },
 });
