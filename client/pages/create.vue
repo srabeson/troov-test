@@ -1,4 +1,9 @@
 <script setup lang="ts">
+// Ensure user is logged in
+if (!localStorage.getItem("access_token")) {
+  navigateTo("/login");
+}
+
 const config = useRuntimeConfig();
 
 const name = ref("");
