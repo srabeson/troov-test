@@ -1,3 +1,10 @@
+<script setup lang="ts">
+// Ensure user is logged in
+if (!localStorage.getItem("access_token")) {
+  navigateTo("/login");
+}
+</script>
+
 <template>
   <!-- Navbar -->
   <nav class="navbar navbar-dark bg-dark">

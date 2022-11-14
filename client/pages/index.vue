@@ -1,9 +1,4 @@
 <script setup lang="ts">
-// Ensure user is logged in
-if (!localStorage.getItem("access_token")) {
-  navigateTo("/login");
-}
-
 const config = useRuntimeConfig();
 
 // Get all available objects
