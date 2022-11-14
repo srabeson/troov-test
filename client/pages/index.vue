@@ -73,9 +73,13 @@ const handleDelete = async (id: string) => {
               <p class="card-text">{{ object.description }}</p>
 
               <div class="d-flex gap-2">
-                <button type="button" class="btn btn-light">
+                <NuxtLink
+                  :to="`/edit/${object._id}`"
+                  type="button"
+                  class="btn btn-light"
+                >
                   <font-awesome-icon icon="fa-solid fa-pen-to-square" />
-                </button>
+                </NuxtLink>
 
                 <button
                   @click="handleDelete(object._id)"
