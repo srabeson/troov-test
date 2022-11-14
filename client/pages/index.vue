@@ -21,6 +21,12 @@ const { data: objects, refresh } = await useFetch<
   baseURL: config.public.apiBase,
 });
 
+// Need to refresh the data after component mounted
+// Else it doesn't update after navigation
+onMounted(() => {
+  refresh();
+});
+
 const errorMessage = ref<string | null>(null);
 
 // Handle object deletion
