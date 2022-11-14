@@ -3,6 +3,12 @@
 if (!localStorage.getItem("access_token")) {
   navigateTo("/login");
 }
+
+const logout = () => {
+  localStorage.clear();
+
+  navigateTo("/login");
+};
 </script>
 
 <template>
@@ -15,7 +21,7 @@ if (!localStorage.getItem("access_token")) {
 
       <NuxtLink class="navbar-brand" to="/">Objects</NuxtLink>
 
-      <button type="button" class="btn btn-dark">
+      <button @click="logout" type="button" class="btn btn-dark">
         <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
       </button>
     </div>
