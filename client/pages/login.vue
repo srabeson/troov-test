@@ -41,7 +41,7 @@ const handleSubmit = async () => {
     await navigateTo("/");
   } catch (error) {
     // Display error message in case of error
-    if (error instanceof FetchError) {
+    if (error instanceof FetchError && error.data && error.data.error) {
       errorMessage.value = error.data.error;
     } else {
       errorMessage.value = "Something went wrong.";
