@@ -18,6 +18,7 @@ const { data: obj } = await useFetch<{
   },
   baseURL: config.public.apiBase,
   key: `${route.params.id}`, // Rerun the fetcher when `id` changes
+  initialCache: false,
 });
 
 const name = ref(obj.value?.object.name);

@@ -14,12 +14,7 @@ const { data: objects, refresh } = await useFetch<
     authorization: `Bearer ${localStorage.getItem("access_token")}`,
   },
   baseURL: config.public.apiBase,
-});
-
-// Need to refresh the data after component mounted
-// Else it doesn't update after navigation
-onMounted(() => {
-  refresh();
+  initialCache: false,
 });
 
 const errorMessage = ref<string | null>(null);
