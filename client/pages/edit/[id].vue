@@ -3,8 +3,25 @@ const config = useRuntimeConfig();
 
 const route = useRoute();
 
-const name = ref("");
-const description = ref("");
+// Get object by id
+const { data: obj } = await useFetch<{
+  success: boolean;
+  object: {
+    _id: string;
+    name: string;
+    description: string;
+  };
+}>(() => `/api/${route.params.id}`, {
+  method: "GET",
+  headers: {
+    authorization: `Bearer ${localStorage.getItem("access_token")}`,
+  },
+  baseURL: config.public.apiBase,
+  key: `${route.params.id}`, // Rerun the fetcher when `id` changes
+});
+
+const name = ref(obj.value?.object.name);
+const description = ref(obj.value?.object.description);
 
 const submitting = ref(false);
 const errorMessage = ref<string | null>(null);
