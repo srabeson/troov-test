@@ -16,10 +16,7 @@ const handleSubmit = async () => {
     submitting.value = true;
 
     // Send object creation request
-    await $fetch<{
-      success: boolean;
-      access_token: string;
-    }>(`/api/create`, {
+    await $fetch(`/api/create`, {
       method: "POST",
       body: {
         name: name.value,

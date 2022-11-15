@@ -28,10 +28,7 @@ const errorMessage = ref<string | null>(null);
 const handleDelete = async (id: string) => {
   try {
     // Send object deletion request
-    await $fetch<{
-      success: boolean;
-      access_token: string;
-    }>(`/api/delete`, {
+    await $fetch(`/api/delete`, {
       method: "POST",
       body: {
         id,

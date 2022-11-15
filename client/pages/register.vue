@@ -20,10 +20,7 @@ const handleSubmit = async () => {
     submitting.value = true;
 
     // Send register request
-    const response = await $fetch<{
-      success: boolean;
-      access_token: string;
-    }>(`/auth/register`, {
+    await $fetch(`/auth/register`, {
       baseURL: config.public.apiBase,
       method: "POST",
       body: {

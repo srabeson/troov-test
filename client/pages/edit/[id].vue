@@ -18,10 +18,7 @@ const handleSubmit = async () => {
     submitting.value = true;
 
     // Send object edition request
-    await $fetch<{
-      success: boolean;
-      access_token: string;
-    }>(`/api/edit`, {
+    await $fetch(`/api/edit`, {
       method: "POST",
       body: {
         id: route.params.id,
